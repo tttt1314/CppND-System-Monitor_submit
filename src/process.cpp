@@ -62,7 +62,7 @@ long int Process::UpTime() { return starttime_ / sysconf(_SC_CLK_TCK); }
 // TODO: Overload the "less than" comparison operator for Process objects
 // REMOVE: [[maybe_unused]] once you define the function
 bool Process::operator<(Process const& a) const { 
-  if(a.cpu_ < this->cpu_) {
+  if( cpu_ * 100 > a.cpu_ * 100) {
     return true;
   }
   else {
