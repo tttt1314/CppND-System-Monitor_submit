@@ -24,6 +24,7 @@ float Process::CpuUtilization() {
     long totaltime;
     long SystemUpTime = LinuxParser::UpTime();
     int seconds;
+   
 
     if(!filestream.is_open()) {
         return -1;
@@ -42,15 +43,21 @@ float Process::CpuUtilization() {
 
     totaltime = utime + stime + cutime + cstime;
     seconds = (int) SystemUpTime  - (starttime_ / sysconf(_SC_CLK_TCK) );
-    Process::cpu_ = (totaltime + 0.0) / sysconf(_SC_CLK_TCK) / (seconds + 0.0);
-    return cpu_;
+    this->cpuRate = (totaltime + 0.0) / sysconf(_SC_CLK_TCK) / (seconds + 0.0);
+
+    return cpuRate;
 }
 
 // TODO: Return the command that generated this process
 string Process::Command() { return LinuxParser::Command(Process::pid_); }
 
 // TODO: Return this process's memory utilization
-string Process::Ram() { return LinuxParser::Ram(Process::pid_); }
+string Process::Ram() {
+  if(ram_ != LinuxParser::Ram(Process::pid_))
+    ram_ =  LinuxParser::Ram(Process::pid_) ;
+  
+  return ram_; 
+}
 
 // TODO: Return the user (name) that generated this process
 string Process::User() { return LinuxParser::User(Process::pid_); }
@@ -62,7 +69,7 @@ long int Process::UpTime() { return starttime_ / sysconf(_SC_CLK_TCK); }
 // TODO: Overload the "less than" comparison operator for Process objects
 // REMOVE: [[maybe_unused]] once you define the function
 bool Process::operator<(Process const& a) const { 
-  if( cpu_ * 100 > a.cpu_ * 100) {
+  if( a.cpuRate < this->cpuRate) {
     return true;
   }
   else {

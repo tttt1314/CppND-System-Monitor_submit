@@ -15,7 +15,9 @@ using std::string;
 using std::vector;
 
 // TODO: Return the system's CPU
-Processor& System::Cpu() { return cpu_; }
+Processor& System::Cpu() { 
+  return cpu_; 
+}
 
 // TODO: Return a container composed of the system's processes
 
@@ -24,8 +26,11 @@ vector<Process>& System::Processes() {
   processes_.clear();
   for(const int& pid: pids){
     Process process(pid);
+    process.CpuUtilization();
+    process.Ram();
     processes_.emplace_back(process); 
   }
+  
   std::sort(processes_.begin(), processes_.end());
   return processes_;
 } 
