@@ -64,7 +64,7 @@ string Process::User() { return LinuxParser::User(Process::pid_); }
 
 // TODO: Return the age of tc
 
-long int Process::UpTime() { return starttime_ / sysconf(_SC_CLK_TCK); }
+long int Process::UpTime() { return LinuxParser::UpTime() - starttime_ / sysconf(_SC_CLK_TCK); }
 
 // TODO: Overload the "less than" comparison operator for Process objects
 // REMOVE: [[maybe_unused]] once you define the function
