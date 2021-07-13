@@ -13,7 +13,7 @@ using std::to_string;
 using std::vector;
 
 
-// DONE: An example of how to read data from the filesystem
+// An example of how to read data from the filesystem
 string LinuxParser::OperatingSystem() {
   string line;
   string key;
@@ -36,7 +36,7 @@ string LinuxParser::OperatingSystem() {
   return value;
 }
 
-// DONE: An example of how to read data from the filesystem
+//An example of how to read data from the filesystem
 string LinuxParser::Kernel() {
   string os, kernel, version;
   string line;
@@ -69,7 +69,7 @@ vector<int> LinuxParser::Pids() {
   return pids;
 }
 
-// TODO: Read and return the system memory utilization
+// Read and return the system memory utilization
 float LinuxParser::MemoryUtilization() {
   int MemTotal;
   int MemFree;
@@ -91,7 +91,7 @@ float LinuxParser::MemoryUtilization() {
 }
 
 
-// TODO: Read and return the system uptime
+// Read and return the system uptime
 long LinuxParser::UpTime() { 
   std::ifstream filestream(kProcDirectory + kUptimeFilename);
   long uptime;
@@ -103,14 +103,11 @@ long LinuxParser::UpTime() {
   }
 }
 
-// TODO: Read and return the number of jiffies for the system
-long LinuxParser::Jiffies() { return 0; }
 
-// TODO: Read and return the number of active jiffies for a PID
-// REMOVE: [[maybe_unused]] once you define the function
-long LinuxParser::ActiveJiffies(int pid[[maybe_unused]]) { return 0; }
 
-// TODO: Read and return the number of active jiffies for the system
+
+
+//Read and return the number of active jiffies for the system
 long LinuxParser::ActiveJiffies() {
   long user, nice, system, idle, iowait, irg, softirg, steal, guest, guest_nice;
   string cpu; 
@@ -125,7 +122,7 @@ long LinuxParser::ActiveJiffies() {
   return user + nice + system + irg + softirg + steal + guest + guest_nice; 
 }
 
-// TODO: Read and return the number of idle jiffies for the system
+//Read and return the number of idle jiffies for the system
 long LinuxParser::IdleJiffies() {
   long user, nice, system, idle, iowait, irg, softirg, steal, guest, guest_nice;
   string cpu; 
@@ -140,12 +137,9 @@ long LinuxParser::IdleJiffies() {
   return idle + iowait;
 }
 
-// TODO: Read and return CPU utilization
-//vector<long> LinuxParser::IdleAndTotalJiffies() { 
-//  return 0; 
-//}
 
-// TODO: Read and return the total number of processes
+
+// Read and return the total number of processes
 int LinuxParser::TotalProcesses() {
   std::ifstream filestream(kProcDirectory + kStatFilename);
     string x;
@@ -183,7 +177,6 @@ int LinuxParser::RunningProcesses() {
 }
 
 // TODO: Read and return the command associated with a process
-// REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Command(int pid) {
   std::ifstream filestream(kProcDirectory + to_string(pid) + kCmdlineFilename);
   string line;
@@ -196,7 +189,6 @@ string LinuxParser::Command(int pid) {
 }
 
 // TODO: Read and return the memory used by a process
-// REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Ram(int pid) {
   std::ifstream filestream(kProcDirectory + to_string(pid) + kStatusFilename);
   string x;
@@ -214,8 +206,7 @@ string LinuxParser::Ram(int pid) {
   }  
 }
 
-// TODO: Read and return the user ID associated with a process
-// REMOVE: [[maybe_unused]] once you define the function
+// Read and return the user ID associated with a process
 string LinuxParser::Uid(int pid) {
   std::ifstream filestream(kProcDirectory + to_string(pid) + kStatusFilename);
   string target;
@@ -235,7 +226,6 @@ string LinuxParser::Uid(int pid) {
 }
 
 // TODO: Read and return the user associated with a process
-// REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::User(int pid) {
   string uid = LinuxParser::Uid(pid); 
   std::ifstream filestream(kPasswordPath);
@@ -249,9 +239,7 @@ string LinuxParser::User(int pid) {
                 return line.substr(0, line.find(":x:") - 0);
             }
         }
+    return "fail";
   }
 }
 
-// TODO: Read and return the uptime of a process
-// REMOVE: [[maybe_unused]] once you define the function
-long LinuxParser::UpTime(int pid[[maybe_unused]]) { return 0; }
