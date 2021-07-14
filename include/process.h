@@ -20,10 +20,9 @@ class Process {
   float cpuRate;
   // TODO: Declare any necessary private members
  private:
-    
-    std::string ram_;
-    int pid_;//add to clarify each Process
-    int starttime_;
+  std::string ram_;
+  int pid_;  // add to clarify each Process
+  int starttime_;
 };
 
 #endif

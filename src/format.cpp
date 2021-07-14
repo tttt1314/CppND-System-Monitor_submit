@@ -1,10 +1,9 @@
-#include <string>
 #include <iomanip>
+#include <string>
 
 #include "format.h"
 
 using std::string;
-
 
 // TODO: Complete this helper function
 // INPUT: Long int measuring seconds
@@ -21,11 +20,11 @@ string Format::ElapsedTime(long seconds) {
   min = seconds % 60;
   seconds /= 60;
   hour = seconds % 24;
-  OutStr << std::setfill('0') << std::setw(2) <<std::to_string(hour);
-  OutStr << ":" ;
-  OutStr << std::setfill('0') << std::setw(2) <<std::to_string(min);
-  OutStr << ":" ;
-  OutStr << std::setfill('0') << std::setw(2) <<std::to_string(sec);
-    
-  return OutStr.str(); 
+  OutStr << std::setfill('0') << std::setw(2) << std::to_string(hour);
+  OutStr << ":";
+  OutStr << std::setfill('0') << std::setw(2) << std::to_string(min);
+  OutStr << ":";
+  OutStr << std::setfill('0') << std::setw(2) << std::to_string(sec);
+
+  return OutStr.str();
 }

@@ -8,7 +8,6 @@
 #include "ncurses_display.h"
 #include "system.h"
 
-
 using std::string;
 using std::to_string;
 
